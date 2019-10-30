@@ -101,4 +101,5 @@ export const Submit = styled.button`
   padding: 6px 36px;
   border: none;
   border-radius: 2px;
+  font-size: 16px;
 `;
