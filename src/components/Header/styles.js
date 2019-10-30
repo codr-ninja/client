@@ -27,6 +27,10 @@ export const Nav = styled.nav`
   & > :not(:last-child) {
     margin-right: 36px;
   }
+
+  @media only screen and (max-width: 1024px) {
+    display: none;
+  }
 `;
 
 export const NavLink = styled(Link)`
@@ -34,6 +38,7 @@ export const NavLink = styled(Link)`
   font-family: 'Comfortaa', cursive;
   text-decoration: none;
   transition: all 0.25s ease;
+  font-size: calc(10px + 0.35vw);
 
   &:hover {
     color: ${darken(0.05, '#bd93f9')};
