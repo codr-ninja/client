@@ -1,5 +1,4 @@
 import React from 'react';
-<<<<<<< HEAD
 import code from '../../assets/svg/code.svg';
 import {
   Container,
@@ -32,12 +31,6 @@ function LandingPage() {
       </Top>
     </Container>
   );
-=======
-import LandingPage from '../LandingPage';
-
-export default function Home() {
-  return <LandingPage />;
->>>>>>> fb1ccc7d9607246827ed99d4a8e399545c899278
 }
 
 export default LandingPage;
