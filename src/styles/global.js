@@ -1,7 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 
 export default createGlobalStyle`
-  @import url("https://fonts.googleapis.com/css?family=Comfortaa:300,400,700|Montserrat&display=swap");
+  @import url("https://fonts.googleapis.com/css?family=Comfortaa:300,400,700|Montserrat:400,700&display=swap");
 
   * {
     margin: 0;
