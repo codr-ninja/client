@@ -28,7 +28,7 @@ export const Nav = styled.nav`
     margin-right: 36px;
   }
 
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 1024px) {
     display: none;
   }
 `;
