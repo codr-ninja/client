@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container, SearchInput, Flex, SubTitle, Table, Thead, Trow } from './styles';
+import { Container, SearchInput, Flex, SubTitle, Table, Thead, Trow, Td } from './styles';
 import Pill from '../../components/Pill';
 import Filter from '../../components/Filter';
 import bookMark from '../../assets/svg/bookmark.svg';
@@ -19,23 +19,29 @@ function QuestionsList() {
             </Flex>
           </Flex>
           <Table>
-            <Thead>Firstname</Thead>
-            <Thead>Lastname</Thead>
-            <Thead>Age</Thead>
+            <Flex flex="1" padding="0 20px">
+              <Thead>Id</Thead>
+              <Thead>Título</Thead>
+              <Thead>aceitação</Thead>
+              <Thead>dificuldade</Thead>
+            </Flex>
             <Trow>
-              <td>Jill</td>
-              <td>Smith</td>
-              <td>50</td>
+              <Td>1</Td>
+              <Td>Jill</Td>
+              <Td>Smith</Td>
+              <Td><Pill text="fácil" background="#44475a" color="#bd93f9" width="100" /></Td>
             </Trow>
             <Trow>
-              <td>Eve</td>
-              <td>Jackson</td>
-              <td>94</td>
+              <Td>2</Td>
+              <Td>Eve</Td>
+              <Td>Jackson</Td>
+              <Td><Pill text="difícil" background="#44475a" color="#bd93f9" width="100" /></Td>
             </Trow>
             <Trow>
-              <td>John</td>
-              <td>Doe</td>
-              <td>80</td>
+              <Td>3</Td>
+              <Td>John</Td>
+              <Td>Doe</Td>
+              <Td><Pill text="fácil" background="#44475a" color="#bd93f9" width="100" /></Td>
             </Trow>
           </Table>
         </Flex>

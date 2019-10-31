@@ -38,19 +38,38 @@ export const SubTitle = styled.h4`
   font-weight: 800;
 `;
 
-export const Table = styled.table`
+export const Table = styled.div`
   width: 100%;
   margin-top: 25px;
   border-spacing: 0;
 `
-export const Thead = styled.th`
+export const Thead = styled.div`
+  display: flex;
+  flex: 1;
   text-align: left;
   font-size: 14px;
   font-weight: 600;
   color: #bd93f9;
   padding: 15px 0;
 `
-export const Trow = styled.tr`
+export const Trow = styled.div`
+  display: flex;
+  flex: 1;
+  flex-wrap: nowrap;
+  align-items: center;
   background-color: #bd93f9;
-  margin: 10px 0;
+  margin: 15px 0;
+  border-radius: 20px;
+  padding: 20px;
+
+  &:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    transition: .2s;
+  }
+`
+
+export const Td = styled.div`
+  display: flex;
+  flex: 1;
+  flex-wrap: nowrap;
 `
