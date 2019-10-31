@@ -19,6 +19,7 @@ export const PillTag = styled.div`
   display: flex;
   justify-content: center;
   color: ${props => props.color || '#44475a'};
+  width: ${props => `${props.width}px` || '50px'};
   min-width: 50px;
   padding: ${props => props.padding || '5px 10px'};
   margin: ${props => props.margin || '0'};
