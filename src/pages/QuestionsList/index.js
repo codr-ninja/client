@@ -1,11 +1,40 @@
-import React, { useState } from 'react';
-import { Container, SearchInput, Flex, SubTitle, Table, Thead, Trow } from './styles';
+import React, { useState, useEffect } from 'react';
+import {
+  Container,
+  SearchInput,
+  Flex,
+  SubTitle,
+  QuestionList,
+  QuestionListHeader,
+  QuestionListItem,
+} from './styles';
 import Pill from '../../components/Pill';
 import Filter from '../../components/Filter';
 import bookMark from '../../assets/svg/bookmark.svg';
+import { firestore } from '../../util/firebase';
 
 function QuestionsList() {
-  const [isClicked, setIsClicked] = useState('')
+  const [isClicked, setIsClicked] = useState('');
+  const [questions, setQuestions] = useState([]);
+
+  useEffect(() => {
+    const fetchQuestions = async () => {
+      const snapshot = await firestore
+        .collection('questions')
+        .orderBy('questionId', 'asc')
+        .get();
+      const result = [];
+
+      snapshot.forEach(doc => {
+        result.push({ id: doc.id, ...doc.data() });
+      });
+
+      setQuestions(result);
+    };
+
+    fetchQuestions();
+  }, []);
+
   return (
     <Container>
       <Flex>
@@ -13,36 +42,54 @@ function QuestionsList() {
           <Flex alignItems="center" style={{ width: '100%' }}>
             <SearchInput placeholder="busque por id, enunciado" />
             <Flex>
-              <Filter text='dificuldade' active={isClicked === 'dificuldade'} {...{ isClicked, setIsClicked }} />
-              <Filter text='status' active={isClicked === 'status'} {...{ isClicked, setIsClicked }} />
-              <Filter text='tags' active={isClicked === 'tags'} {...{ isClicked, setIsClicked }} />
+              <Filter
+                text="dificuldade"
+                active={isClicked === 'dificuldade'}
+                {...{ isClicked, setIsClicked }}
+              />
+              <Filter
+                text="status"
+                active={isClicked === 'status'}
+                {...{ isClicked, setIsClicked }}
+              />
+              <Filter
+                text="tags"
+                active={isClicked === 'tags'}
+                {...{ isClicked, setIsClicked }}
+              />
             </Flex>
           </Flex>
-          <Table>
-            <Thead>Firstname</Thead>
-            <Thead>Lastname</Thead>
-            <Thead>Age</Thead>
-            <Trow>
-              <td>Jill</td>
-              <td>Smith</td>
-              <td>50</td>
-            </Trow>
-            <Trow>
-              <td>Eve</td>
-              <td>Jackson</td>
-              <td>94</td>
-            </Trow>
-            <Trow>
-              <td>John</td>
-              <td>Doe</td>
-              <td>80</td>
-            </Trow>
-          </Table>
+          <QuestionList>
+            <QuestionListHeader>
+              <p>Id</p>
+              <p>Titulo</p>
+              <p>Dificuldade</p>
+            </QuestionListHeader>
+            {questions.map(question => (
+              <QuestionListItem
+                to={{ pathname: `/solve/${question.questionId}` }}
+              >
+                <p>{question.questionId}</p>
+                <p>{question.title}</p>
+                <Pill
+                  text={question.level}
+                  key={question.questionId}
+                  background="#282a36"
+                  color="#bd93f9"
+                  width="96px"
+                />
+              </QuestionListItem>
+            ))}
+          </QuestionList>
         </Flex>
         <Flex padding="0 0 0 40px">
           <Flex flow="column">
             <Flex alignItems="center">
-              <img src={bookMark} alt="bookMark" style={{ marginRight: '10px' }} />
+              <img
+                src={bookMark}
+                alt="bookMark"
+                style={{ marginRight: '10px' }}
+              />
               <SubTitle>tópicos</SubTitle>
             </Flex>
             <Flex padding="15px 0" wrap="wrap">
