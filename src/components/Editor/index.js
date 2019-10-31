@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { ControlledEditor, monaco } from '@monaco-editor/react';
 import { draculaish } from './themes';
 
-function Editor({ theme, value, language, onChange }) {
+function Editor({ theme, value, language, onChange, fontSize }) {
   monaco.init().then(monacoInstance => {
     monacoInstance.editor.defineTheme('dracula', draculaish);
     monacoInstance.languages.typescript.javascriptDefaults.setCompilerOptions({
@@ -13,6 +13,7 @@ function Editor({ theme, value, language, onChange }) {
   });
 
   const editorOptions = {
+    fontSize,
     suggest: {
       filterGraceful: false,
       showIcons: false,
@@ -51,6 +52,7 @@ Editor.propTypes = {
   theme: PropTypes.string,
   value: PropTypes.string,
   language: PropTypes.string,
+  fontSize: PropTypes.string,
   onChange: PropTypes.func,
 };
 
@@ -58,6 +60,7 @@ Editor.defaultProps = {
   theme: 'dracula',
   value: '',
   language: 'javascript',
+  fontSize: '14px',
   onChange: () => {},
 };
 
