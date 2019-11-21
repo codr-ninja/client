@@ -3,6 +3,7 @@ import {
   Container,
   SearchInput,
   Flex,
+  Wrapper,
   SubTitle,
   QuestionList,
   QuestionListHeader,
@@ -37,11 +38,11 @@ function QuestionsList() {
 
   return (
     <Container>
-      <Flex>
-        <Flex flex="3" padding="0 40px 0 0" flow="column">
+      <Wrapper>
+        <Flex flex="3" padding="0 40px 0 0" flow="column" className="filter">
           <Flex alignItems="center" style={{ width: '100%' }}>
             <SearchInput placeholder="busque por id, enunciado" />
-            <Flex>
+            <Flex justifyContent='space-between' className="filter-toggle">
               <Filter
                 text="dificuldade"
                 active={isClicked === 'dificuldade'}
@@ -82,7 +83,7 @@ function QuestionsList() {
             ))}
           </QuestionList>
         </Flex>
-        <Flex padding="0 0 0 40px">
+        <Flex padding="0 0 0 40px" className="topic">
           <Flex flow="column">
             <Flex alignItems="center">
               <img
@@ -100,7 +101,7 @@ function QuestionsList() {
             </Flex>
           </Flex>
         </Flex>
-      </Flex>
+      </Wrapper>
     </Container>
   );
 }
