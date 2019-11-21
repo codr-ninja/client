@@ -9,6 +9,10 @@ export const Container = styled.div`
   background-color: ${props =>
     props.theme === 'clear' ? '#f8f8f2' : '#44475a'};
   padding-top: 50px;
+
+  @media only screen and (max-width: 1024px) {
+    height: 90vh;
+  }
 `;
 
 export const SearchInput = styled.input`
@@ -38,7 +42,30 @@ export const Flex = styled.div`
   align-items: ${props => props.alignItems || 'flex-start'};
   flex: ${props => props.flex || '1'};
   padding: ${props => props.padding || '0'};
+
+  @media (max-width: 768px) {
+    flex: 1;
+    flex-wrap: wrap;
+
+    &.filter, &.topic {
+      padding: 0;
+    }
+
+    &.topic {
+      margin-top: 20px;
+    }
+
+    &.filter-toggle {
+      margin: 25px 0 5px;
+    }
+  }
 `;
+
+export const Wrapper = styled(Flex) `
+  @media (max-width: 768px) {
+    flex-flow: column;
+  }
+`
 
 export const SubTitle = styled.h4`
   color: #bd93f9;
@@ -62,7 +89,7 @@ export const QuestionListHeader = styled.div`
   font-size: calc(10px + 0.35vw);
 `;
 
-export const QuestionListItem = styled(Link)`
+export const QuestionListItem = styled(Link) `
   text-decoration: none;
   display: grid;
   grid-template-columns: 1fr 3fr 1fr;
