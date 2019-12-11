@@ -17,6 +17,7 @@ import { firestore } from '../../util/firebase';
 function QuestionsList() {
   const [isClicked, setIsClicked] = useState('');
   const [questions, setQuestions] = useState([]);
+  const [input, setInput] = useState('');
 
   useEffect(() => {
     const fetchQuestions = async () => {
@@ -36,13 +37,23 @@ function QuestionsList() {
     fetchQuestions();
   }, []);
 
+  console.log(input);
+  console.log(
+    questions.filter(question =>
+      question.title.toUpperCase().includes(input.toUpperCase())
+    )
+  );
+
   return (
     <Container>
       <Wrapper>
         <Flex flex="3" padding="0 40px 0 0" flow="column" className="filter">
           <Flex alignItems="center" style={{ width: '100%' }}>
-            <SearchInput placeholder="busque por id, enunciado" />
-            <Flex justifyContent='space-between' className="filter-toggle">
+            <SearchInput
+              placeholder="busque por id, enunciado"
+              onChange={e => setInput(e.target.value)}
+            />
+            <Flex justifyContent="space-between" className="filter-toggle">
               <Filter
                 text="dificuldade"
                 active={isClicked === 'dificuldade'}
@@ -66,21 +77,25 @@ function QuestionsList() {
               <p>Titulo</p>
               <p>Dificuldade</p>
             </QuestionListHeader>
-            {questions.map(question => (
-              <QuestionListItem
-                to={{ pathname: `/solve/${question.questionId}` }}
-              >
-                <p>{question.questionId}</p>
-                <p>{question.title}</p>
-                <Pill
-                  text={question.level}
-                  key={question.questionId}
-                  background="#282a36"
-                  color="#bd93f9"
-                  width="96px"
-                />
-              </QuestionListItem>
-            ))}
+            {questions
+              .filter(question =>
+                question.title.toUpperCase().includes(input.toUpperCase())
+              )
+              .map(question => (
+                <QuestionListItem
+                  to={{ pathname: `/solve/${question.questionId}` }}
+                >
+                  <p>{question.questionId}</p>
+                  <p>{question.title}</p>
+                  <Pill
+                    text={question.level}
+                    key={question.questionId}
+                    background="#282a36"
+                    color="#bd93f9"
+                    width="96px"
+                  />
+                </QuestionListItem>
+              ))}
           </QuestionList>
         </Flex>
         <Flex padding="0 0 0 40px" className="topic">

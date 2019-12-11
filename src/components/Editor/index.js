@@ -19,7 +19,6 @@ function Editor({ theme, value, language, onChange, fontSize }) {
       showIcons: false,
       maxVisibleSuggestions: 3,
     },
-    fontSize: '14px',
     lineDecorationsWidth: '8px',
     renderLineHighlight: 'gutter',
     quickSuggestions: false,
