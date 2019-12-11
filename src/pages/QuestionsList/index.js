@@ -11,6 +11,7 @@ import {
 } from './styles';
 import Pill from '../../components/Pill';
 import Filter from '../../components/Filter';
+import Button from '../../components/Button';
 import bookMark from '../../assets/svg/bookmark.svg';
 import { firestore } from '../../util/firebase';
 
@@ -96,6 +97,9 @@ function QuestionsList() {
                   />
                 </QuestionListItem>
               ))}
+            <Flex justifyContent="center">
+              <Button>Ver mais</Button>
+            </Flex>
           </QuestionList>
         </Flex>
         <Flex padding="0 0 0 40px" className="topic">
