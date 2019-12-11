@@ -19,6 +19,7 @@ function QuestionsList() {
   const [isClicked, setIsClicked] = useState('');
   const [questions, setQuestions] = useState([]);
   const [input, setInput] = useState('');
+  const [limit, setLimit] = useState(4);
 
   useEffect(() => {
     const fetchQuestions = async () => {
@@ -44,6 +45,8 @@ function QuestionsList() {
       question.title.toUpperCase().includes(input.toUpperCase())
     )
   );
+
+  console.log(limit);
 
   return (
     <Container>
@@ -98,7 +101,7 @@ function QuestionsList() {
                 </QuestionListItem>
               ))}
             <Flex justifyContent="center">
-              <Button>Ver mais</Button>
+              <Button onClick={() => setLimit(limit + 4)}>Ver mais</Button>
             </Flex>
           </QuestionList>
         </Flex>
