@@ -7,7 +7,6 @@ export function Header() {
       <Logo to="/">codr</Logo>
       <Nav>
         <NavLink to="/questions">problemas</NavLink>
-        <NavLink to="/questions">code battle</NavLink>
         <NavLink to="/questions">entrar</NavLink>
       </Nav>
     </Container>

@@ -51,14 +51,22 @@ function SolveQuestion() {
     return window.innerWidth < 1024 ? '16px' : '14px';
   }
 
+  function saveAttempt(attempt) {
+    firestore
+      .collection('attempts')
+      .add(attempt)
+      .then(a => console.log(a));
+  }
+
   function handleSubmit(event) {
     event.preventDefault();
 
     try {
       const userSolution = eval(`(${solution})`);
 
+      const start = window.performance.now();
+
       let hasError = false;
-      // console.time('runTime');
       for (const testCase of question.testCases) {
         if (userSolution(testCase.input) !== testCase.output) {
           toast.error('A sua solução está incorreta.');
@@ -67,23 +75,34 @@ function SolveQuestion() {
           break;
         }
       }
-      // const timer = console.timeEnd('runTime');
+
+      const finish = window.performance.now();
+      const elapsedTime = (finish - start).toFixed(2);
+      console.log(elapsedTime);
 
       if (hasError) {
         toast.error('Solução inválida');
-      } else {
-        toast.success('Parabéns! A sua solução está correta');
-        // SALVAR TENTATIVA NO FIREBASE
+        return saveAttempt({
+          code: solution,
+          user: 'thallescarvalho12@gmail.com',
+          isCorrect: false,
+        });
       }
+      toast.success('Parabéns! A sua solução está correta');
+      toast.info(`Tempo de execução: ${elapsedTime}/ms`);
+
+      return saveAttempt({
+        code: solution,
+        user: 'thallescarvalho12@gmail.com',
+        elapsedTime,
+        isCorrect: true,
+      });
     } catch (error) {
       toast.error('Código inválido');
     }
-  }
 
-  // function setSolution(event, value) {
-  //   console.log(event);
-  //   console.log(value);
-  // }
+    return null;
+  }
 
   return question ? (
     <Form onSubmit={handleSubmit}>
