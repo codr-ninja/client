@@ -39,7 +39,8 @@ function QuestionsList() {
     fetchQuestions();
   }, []);
 
-  console.log(questions.length <= limit);
+  const tags = [];
+  questions.map(question => question.tags.map(tag => tags.push(tag)));
 
   return (
     <Container>
@@ -111,10 +112,7 @@ function QuestionsList() {
               <SubTitle>tópicos</SubTitle>
             </Flex>
             <Flex padding="15px 0" wrap="wrap">
-              <Pill text="matemática" value="110" margin="0 10px 10px 0" />
-              <Pill text="array" value="110" margin="0 10px 10px 0" />
-              <Pill text="for" value="110" margin="0 10px 10px 0" />
-              <Pill text="matemática" value="110" margin="0 10px 10px 0" />
+              {tags.map(tag => <Pill text={tag} value="110" margin="0 10px 10px 0" />)}
             </Flex>
           </Flex>
         </Flex>
