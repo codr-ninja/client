@@ -1,7 +1,11 @@
+/* eslint-disable guard-for-in */
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable no-eval */
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import {
-  Container,
+  Form,
   Settings,
   LanguageSelector,
   Content,
@@ -23,6 +27,7 @@ function SolveQuestion() {
   const questionId = Number(id);
 
   const [question, setQuestion] = useState();
+  const [solution, setSolution] = useState('// Escreva o seu código aqui');
 
   useEffect(() => {
     const fetchQuestion = async () => {
@@ -46,8 +51,42 @@ function SolveQuestion() {
     return window.innerWidth < 1024 ? '16px' : '14px';
   }
 
+  function handleSubmit(event) {
+    event.preventDefault();
+
+    try {
+      const userSolution = eval(`(${solution})`);
+
+      let hasError = false;
+      // console.time('runTime');
+      for (const testCase of question.testCases) {
+        if (userSolution(testCase.input) !== testCase.output) {
+          toast.error('A sua solução está incorreta.');
+
+          hasError = true;
+          break;
+        }
+      }
+      // const timer = console.timeEnd('runTime');
+
+      if (hasError) {
+        toast.error('Solução inválida');
+      } else {
+        toast.success('Parabéns! A sua solução está correta');
+        // SALVAR TENTATIVA NO FIREBASE
+      }
+    } catch (error) {
+      toast.error('Código inválido');
+    }
+  }
+
+  // function setSolution(event, value) {
+  //   console.log(event);
+  //   console.log(value);
+  // }
+
   return question ? (
-    <Container>
+    <Form onSubmit={handleSubmit}>
       <Settings>
         <LanguageSelector>
           <option value="javascript">Javascript</option>
@@ -72,14 +111,15 @@ function SolveQuestion() {
         <EditorWrapper>
           <CodeEditor
             fontSize={getEditorFontSize()}
-            value="// Escreva o seu código aqui"
+            onChange={(e, value) => setSolution(value)}
+            value={solution}
           />
         </EditorWrapper>
       </Content>
       <QuestionFooter>
         <Submit type="submit">enviar</Submit>
       </QuestionFooter>
-    </Container>
+    </Form>
   ) : (
     <div />
   );

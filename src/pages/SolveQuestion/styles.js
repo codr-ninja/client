@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { lighten } from 'polished';
 
-export const Container = styled.div`
+export const Form = styled.form`
   background-color: #44475a;
   padding: 0 5vw 48px;
 `;
