@@ -47,7 +47,8 @@ export const Flex = styled.div`
     flex: 1;
     flex-wrap: wrap;
 
-    &.filter, &.topic {
+    &.filter,
+    &.topic {
       padding: 0;
     }
 
@@ -61,11 +62,11 @@ export const Flex = styled.div`
   }
 `;
 
-export const Wrapper = styled(Flex) `
+export const Wrapper = styled(Flex)`
   @media (max-width: 768px) {
     flex-flow: column;
   }
-`
+`;
 
 export const SubTitle = styled.h4`
   color: #bd93f9;
@@ -89,7 +90,7 @@ export const QuestionListHeader = styled.div`
   font-size: calc(10px + 0.35vw);
 `;
 
-export const QuestionListItem = styled(Link) `
+export const QuestionListItem = styled(Link)`
   text-decoration: none;
   display: grid;
   grid-template-columns: 1fr 3fr 1fr;

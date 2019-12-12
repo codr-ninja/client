@@ -3,6 +3,7 @@
 /* eslint-disable no-eval */
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import {
   Form,
@@ -28,6 +29,9 @@ function SolveQuestion() {
 
   const [question, setQuestion] = useState();
   const [solution, setSolution] = useState('// Escreva o seu código aqui');
+
+  const user = useSelector(state => state.user);
+  const hasUserInfo = Boolean(Object.keys(user).length);
 
   useEffect(() => {
     const fetchQuestion = async () => {
@@ -78,24 +82,48 @@ function SolveQuestion() {
 
       const finish = window.performance.now();
       const elapsedTime = (finish - start).toFixed(2);
-      console.log(elapsedTime);
 
       if (hasError) {
         toast.error('Solução inválida');
+        if (hasUserInfo) {
+          return saveAttempt({
+            code: solution,
+            user: user.email,
+            isCorrect: false,
+          });
+        }
+
         return saveAttempt({
           code: solution,
-          user: 'thallescarvalho12@gmail.com',
+          user: 'Anonymous',
           isCorrect: false,
         });
       }
       toast.success('Parabéns! A sua solução está correta');
       toast.info(`Tempo de execução: ${elapsedTime}/ms`);
 
+      if (hasUserInfo) {
+        return saveAttempt({
+          code: solution,
+          user: user.email,
+          elapsedTime,
+          isCorrect: true,
+          question: {
+            id: question.questionId,
+            title: question.title,
+          },
+        });
+      }
+
       return saveAttempt({
         code: solution,
-        user: 'thallescarvalho12@gmail.com',
+        user: 'Anonymous',
         elapsedTime,
         isCorrect: true,
+        question: {
+          id: question.questionId,
+          title: question.title,
+        },
       });
     } catch (error) {
       toast.error('Código inválido');
