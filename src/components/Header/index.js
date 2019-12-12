@@ -7,7 +7,6 @@ export function Header({ setModalOpen }) {
       <Logo to="/">codr</Logo>
       <Nav>
         <NavLink to="/questions">problemas</NavLink>
-        <NavLink to="/questions">code battle</NavLink>
         <NavLink onClick={() => setModalOpen(true)}>entrar</NavLink>
       </Nav>
     </Container>
