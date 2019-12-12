@@ -40,7 +40,11 @@ function QuestionsList() {
   }, []);
 
   const tags = [];
-  questions.map(question => question.tags.map(tag => tags.push(tag)));
+  const verifyArray = (tag) => {
+    if (!tags.includes(tag))
+      tags.push(tag)
+  }
+  questions.map(question => question.tags.map(tag => verifyArray(tag)));
 
   return (
     <Container>
