@@ -14,6 +14,7 @@ import Filter from '../../components/Filter';
 import Button from '../../components/Button';
 import bookMark from '../../assets/svg/bookmark.svg';
 import { firestore } from '../../util/firebase';
+import { verify } from 'crypto';
 
 function QuestionsList() {
   const [isClicked, setIsClicked] = useState('');
@@ -40,7 +41,11 @@ function QuestionsList() {
   }, []);
 
   const tags = [];
-  questions.map(question => question.tags.map(tag => tags.push(tag)));
+  const verifyAarray = (tag) => {
+    if (!tags.includes(tag))
+      tags.push(tag)
+  }
+  questions.map(question => question.tags.map(tag => verifyAarray(tag)));
 
   return (
     <Container>
