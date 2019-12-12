@@ -39,7 +39,7 @@ const Modal = ({ setModalOpen }) => {
   }
 
   return (
-    <Wrapper>
+    <Wrapper onClick={() => onModalClose()}>
       <ModalTag>
         <Text>Login</Text>
         <Button onClick={() => handleLogin(githubProvider)}>
@@ -68,7 +68,7 @@ const Wrapper = styled.div`
 const ModalTag = styled.div`
   width: 320px;
   border-radius: 12px;
-  background: #fff;
+  background: #bd93f9;
   padding: 20px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
   z-index: 5;
@@ -90,7 +90,7 @@ const Button = styled.button`
   border: none;
   text-align: center;
   background: #44475a;
-  color: #bd93f9;
+  color: #fff;
   margin-bottom: 15px;
   padding: 16px 10px;
   border-radius: 12px;

@@ -6,8 +6,8 @@ const Button = ({ children, onClick }) => (
 )
 
 const ButtonTag = styled.button`
-background: #fff;
-color: #282a36;
+background: #282a36;
+color: #fff;
 padding: 10px 16px;
 width: 160px;
 border-radius: 12px;
